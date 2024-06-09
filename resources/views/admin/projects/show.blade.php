@@ -2,9 +2,6 @@
 @section('content')
     <div class="container">
         <div>
-            <h1>
-                ciao
-            </h1>
             <p>
                 {{ $project->name }}
             </p>

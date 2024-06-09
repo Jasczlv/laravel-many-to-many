@@ -16,6 +16,7 @@ class ProjectController extends Controller
     {
         //
         $projects = Project::all();
+        $projects = Project::with(['technologies', 'technologies.projects'])->get();
         return view('admin.projects.index', compact('projects'));
     }
 

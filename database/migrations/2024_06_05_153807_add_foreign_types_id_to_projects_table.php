@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             //
-            /* $table->unsignedBigInteger('type_id')->nullable();
+            // $table->unsignedBigInteger('type_id')->nullable();
 
-            $table->foreign('type_id')
-                ->references('id')
-                ->on('types');
-             */
+            // $table->foreign('type_id')
+            //     ->references('id')
+            //     ->on('types');
+
             //shortcut for the code above
-            $table->foreignId('type_id')->constrained();
+            $table->foreignId('type_id')->nullable()->constrained();
         });
     }
 

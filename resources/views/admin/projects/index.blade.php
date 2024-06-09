@@ -1,53 +1,74 @@
 @extends('layouts.app')
 @section('content')
-    <h1>
-        Ciao
-    </h1>
-    <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Nome
-                    </th>
-                    <th>
-                        Github
-                    </th>
-                    <th>Descrizione</th>
-                    <th>Type</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($projects as $project)
+    <section class="mb-5">
+        <div class="container d-flex justify-content-center my-5">
+            <h1>
+                Projects list
+            </h1>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            {{ $project->name }}
-                        </td>
-                        <td>
-                            <a href="{{ $project->giturl }}">Link</a>
-                        </td>
-                        <td>
-                            {{ $project->description }}
-                        </td>
-                        {{-- type --}}
-                        <td>
-                            {{ $project->type->type }}
-                        </td>
-                        <td>
-                            <div class="d-flex gap-2">
-                                <a href="{{ route('admin.projects.edit', $project) }}">Edit</a>
-                                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-
-                                    <button class="btn btn-link link-danger">Trash</button>
-
-                                </form>
-                            </div>
-                        </td>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Github
+                        </th>
+                        <th>Descrizione</th>
+                        <th>Type</th>
+                        <th>Technologies</th>
+                        <th>
+                            {{-- placeholder to extend table line --}}
+                        </th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach ($projects as $project)
+                        <tr>
+                            <td>
+                                {{ $project->name }}
+                            </td>
+                            <td>
+                                <a href="{{ $project->giturl }}">Link</a>
+                            </td>
+                            <td>
+                                {{ $project->description }}
+                            </td>
+                            {{-- type --}}
+                            @if ($project->type === null || $project->type->type === null)
+                                <td>
+                                    Undefined
+                                </td>
+                            @else
+                                {{-- ($project->type !== null && $project->type->type !== null) --}}
+                                <td>
+                                    {{ $project->type->type }}
+                                </td>
+                            @endif
+                            <td>
+                                {{-- @dd($project) --}}
+                                @foreach ($project->technologies as $technology)
+                                    {{ $technology->tech }}
+                                @endforeach
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-primary">Edit</a>
+                                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+
+                                        <button class="btn btn-danger text-light">Trash</button>
+
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </section>
 @endsection
