@@ -32,10 +32,28 @@
                         placeholder="https://github.com/">
                 </div>
                 <div class="mb-3">
-                    <label for="type_id" class="form-label">
+                    {{-- <label for="type_id" class="form-label">
                         Project Type
                     </label>
-                    <input type="text" name="type_id" class="form-control" id="type_id" placeholder="Designer">
+                    <input type="text" name="type_id" class="form-control" id="type_id" placeholder="Designer"> --}}
+                    <div class="mb-3">
+                        <span class="fw-bold d-block mb-2">Type</span>
+                        <select name="type_id" id="type_id">
+                            <option value="1">Dev Ops</option>
+                            <option value="2">BackEnd</option>
+                            <option value="3">FrontEnd</option>
+                            <option value="4">Designer</option>
+                            <option value="5">Undefined</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <span class="fw-bold d-block mb-2">Technology</span>
+                    <select name="tech" id="tech">
+                        @foreach ($technologies as $technology)
+                            <option value="{{ $technology->id }}">{{ $technology->tech }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <button class="btn btn-primary">Crea</button>
             </form>

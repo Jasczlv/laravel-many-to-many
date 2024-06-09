@@ -28,7 +28,7 @@
                     @foreach ($projects as $project)
                         <tr>
                             <td>
-                                {{ $project->name }}
+                                <a href="{{ route('admin.projects.show', $project) }}">{{ $project->name }}</a>
                             </td>
                             <td>
                                 <a href="{{ $project->giturl }}">Link</a>

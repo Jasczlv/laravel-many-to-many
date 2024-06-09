@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -26,7 +28,10 @@ class ProjectController extends Controller
     public function create()
     {
         //
-        return view('admin.projects.create');
+        $technologies = Technology::orderBy('tech', 'asc')->get();
+        $types = Type::orderBy('type', 'asc')->get();
+
+        return view('admin.projects.create', compact('technologies', 'types'));
     }
 
     /**
@@ -69,6 +74,8 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         //
+
+
         return view('admin.projects.show', compact('project'));
     }
 
