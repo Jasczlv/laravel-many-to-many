@@ -49,13 +49,16 @@
                 </div>
                 <div class="mb-3">
                     <span class="fw-bold d-block mb-2">Technology</span>
-                    <select name="tech" id="tech">
-                        @foreach ($technologies as $technology)
-                            <option value="{{ $technology->id }}">{{ $technology->tech }}</option>
-                        @endforeach
-                    </select>
+                    @foreach ($technologies as $technology)
+                        <input @checked(in_array($technology->id, old('technologies', []))) type="checkbox" name="technologies[]"
+                            id="technology-{{ $technology->id }}" value="{{ $technology->id }}">
+                        <label class="form-check-label" for="technology-{{ $technology->id }}">
+                            {{ $technology->tech }}
+                        </label>
+                    @endforeach
                 </div>
                 <button class="btn btn-primary">Crea</button>
+
             </form>
             @if ($errors->any())
                 <div class="alert alert-danger">

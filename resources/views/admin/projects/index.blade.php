@@ -67,6 +67,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    {{-- @dd($projects) --}}
                 </tbody>
             </table>
         </div>

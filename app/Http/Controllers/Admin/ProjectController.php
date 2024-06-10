@@ -64,6 +64,10 @@ class ProjectController extends Controller
 
         $new_project = Project::create($form_data);
 
+        if ($request->has('technologies')) {
+            $new_project->technologies()->attach($request->technologies);
+        }
+
 
         return to_route('admin.projects.show', $new_project);
     }
@@ -97,6 +101,12 @@ class ProjectController extends Controller
         $form_data = $request->all();
         $project->fill($form_data);
         $project->save();
+
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies);
+        } else {
+            $project->technologies()->detach();
+        }
 
         return to_route('admin.projects.show', $project);
     }
