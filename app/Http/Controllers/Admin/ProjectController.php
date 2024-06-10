@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
@@ -37,9 +38,11 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        $form_data = $request->all();
+
+
+        $form_data = $request->validated();
 
         $base_slug = Str::slug($form_data['description']);
         $slug = $base_slug;

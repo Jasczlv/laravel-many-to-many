@@ -11,7 +11,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'giturl' => 'required|url',
+            'type_id' => 'required|integer|exists:types,id', // Ensure this references the correct table
+            'technologies' => 'array',
+            'technologies.*' => 'integer|exists:technologies,id' // Ensure this references the correct table
+
         ];
     }
 }
